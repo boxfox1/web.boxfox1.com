@@ -1,0 +1,742 @@
+/* =========================================================
+   Boxfox1 Web — main.css (clean + anti-banding)
+   ========================================================= */
+
+/* ============ Base / Theme ============ */
+:root{
+  --bg-0:#060a10;
+  --bg-1:#0a1220;
+
+  --cardSolid: rgb(12,18,30);
+  --cardSolidHover: rgb(14,21,36);
+
+  --border:rgba(255,255,255,.08);
+
+  --text:#e9eef7;
+  --muted:rgba(233,238,247,.72);
+
+  --primary:#22a6ff;
+  --success:#36d68e;
+
+  /* CTA accent (naranja) */
+  --accent:#ff9f1a;
+  --accentBorder: rgba(255,159,26,.55);
+
+  --shadow: 0 25px 60px rgba(0,0,0,.45);
+  --radius: 18px;
+
+  --heroH: 420px;
+  --navOffset: 96px; /* offset para anchors */
+}
+
+html,body{ height:100%; }
+
+body{
+  margin: 0;
+  color: var(--text);
+  padding-top: 76px; /* nav fixed */
+  text-rendering: optimizeLegibility;
+
+  /* Fondo continuo */
+  background:
+    radial-gradient(1200px 600px at 15% 10%, rgba(34,166,255,.22), transparent 55%),
+    radial-gradient(1200px 600px at 85% 30%, rgba(54,214,142,.14), transparent 60%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1) 45%, var(--bg-0));
+
+  /* Reduce banding al scrollear */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Dithering (ruido sutil) para eliminar banding */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .035; /* 0.02–0.06 */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+}
+
+/* Asegura que el contenido quede arriba del noise layer */
+body > *{
+  position: relative;
+  z-index: 1;
+}
+
+a{ color: var(--text); }
+a:hover{ color:#fff; }
+.text-muted{ color: var(--muted) !important; }
+
+/* ============ Anchor offset (navbar fixed) ============ */
+#inicio,
+section[id]{
+  scroll-margin-top: var(--navOffset);
+}
+
+@media (max-width: 991.98px){
+  body{ padding-top: 72px; }
+  :root{ --navOffset: 88px; }
+}
+
+/* ============ Navbar ============ */
+.navbar.nav-glass{
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1030;
+
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+
+  background: rgba(8,12,18,.58) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+/* “Feather” corto para evitar costura bajo el menú */
+.navbar.nav-glass::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom:-10px;
+  height:10px;
+  pointer-events:none;
+  background: linear-gradient(180deg, rgba(8,12,18,.22), rgba(8,12,18,0));
+}
+
+.navbar.nav-glass.navbar-scrolled{
+  background: rgba(8,12,18,.78) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.28) !important;
+}
+
+.navbar .brand-text{
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+/* NAV — activo más notorio (bold + underline sutil) */
+.navbar .nav-link{
+  font-weight: 500;
+  opacity: .92;
+}
+
+.navbar .nav-link.active{
+  font-weight: 800;
+  opacity: 1;
+  color: rgba(233,238,247,.98) !important;
+  position: relative;
+}
+
+.navbar .nav-link.active::after{
+  content:"";
+  position:absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(34,166,255,.65);
+}
+
+/* ============ Hero ============ */
+.hero{ padding: 44px 0 18px; }
+.hero .row{ align-items: center; }
+
+.hero-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  padding: 26px 26px 22px;
+  box-shadow: var(--shadow);
+}
+
+.hero-pill{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  font-size:12px;
+  color: rgba(255,255,255,.85);
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.25);
+}
+
+.hero-title{
+  margin-top: 12px;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.08;
+  font-weight: 750;
+  letter-spacing: -.4px;
+}
+
+.hero-lead{
+  margin-top: 12px;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.hero-actions{
+  margin-top: 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.hero-meta{
+  margin-top: 14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+}
+
+.meta-item i{
+  margin-right: 6px;
+  color: rgba(255,255,255,.75);
+}
+
+.hero-figure{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+  padding: 8px 0;
+}
+
+.hero-image{
+  width:100%;
+  max-width:560px;
+  height:auto;
+  border-radius:20px;
+  opacity:.96;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.45));
+}
+
+@media (min-width: 992px){
+  .hero .hero-card{ min-height: var(--heroH); }
+
+  .hero .hero-figure{
+    height: var(--heroH);
+    width: 100%;
+    padding: 0;
+  }
+
+  .hero .hero-image{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* ============ Sections ============ */
+.section{ padding: 54px 0; }
+.section--alt{ background: transparent !important; border: 0 !important; }
+
+.section-title{
+  font-weight: 750;
+  letter-spacing: -.2px;
+  margin-bottom: 6px;
+}
+
+.section-subtitle{
+  color: var(--muted);
+  margin: 0;
+  max-width: 80ch;
+}
+
+/* ============ Cards ============ */
+.card-dark{
+  background: var(--cardSolid) !important;
+  background-image: none !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+.service-card{
+  padding: 18px 18px 16px;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+a.card.card-dark.service-card:hover{
+  transform: translateY(-2px);
+  background: var(--cardSolidHover) !important;
+  border-color: rgba(34,166,255,.35);
+}
+
+.service-icon{
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(34,166,255,.10);
+  border: 1px solid rgba(34,166,255,.25);
+  color: rgba(255,255,255,.90);
+}
+
+.service-title{
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.service-desc{
+  color: var(--muted);
+  margin: 6px 0 0;
+  font-size: 16px;
+}
+
+/* Headings dentro de cards oscuras siempre legibles */
+.card-dark h3,
+.card-dark .h6{
+  color:#fff;
+  font-weight:800;
+}
+
+/* SEO panel */
+.seo-panel{
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--cardSolid);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+
+/* Checklist */
+.checklist{
+  list-style:none;
+  padding-left:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding-left:20px;
+  margin:10px 0;
+  color: rgba(255,255,255,.78);
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:0;
+  color: var(--success);
+  font-weight:800;
+}
+
+/* ============ Footer ============ */
+.footer{
+  padding: 44px 0 28px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: rgba(0,0,0,.18);
+}
+
+.footer-title{ font-weight: 950; }
+.footer-small{ color: var(--muted); }
+
+.footer-link{
+  color: rgba(255,255,255,.78);
+  text-decoration:none;
+}
+
+.footer-link:hover{
+  color:#fff;
+  text-decoration: underline;
+}
+
+.footer-social{
+  color: rgba(255,255,255,.80);
+  font-size:20px;
+  line-height:1;
+  text-decoration:none;
+  transition: transform .2s ease, color .2s ease, opacity .2s ease;
+}
+
+.footer-social:hover{
+  color:#fff;
+  transform: translateY(-1px);
+}
+
+.footer-bottom{
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+/* Footer list — chevron + animation */
+.footer ul{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.footer ul li{
+  position: relative;
+  padding-left: 14px;
+  margin: 10px 0;
+}
+
+.footer ul li::before{
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(34,166,255,.75);
+  transition: transform .2s ease, color .2s ease, opacity .2s ease;
+}
+
+.footer ul li:hover::before{
+  transform: translateX(4px);
+  color: #22a6ff;
+  opacity: 1;
+}
+
+.footer ul li a{
+  display: inline-block;
+  transition: transform .2s ease, color .2s ease;
+}
+
+.footer ul li:hover a{
+  transform: translateX(4px);
+  color: #fff;
+}
+
+/* ============ Buttons ============ */
+.btn-primary{
+  background-color: var(--primary);
+  border-color: rgba(34,166,255,.65);
+}
+
+.btn-primary:hover{
+  background-color:#149cff;
+  border-color: rgba(34,166,255,.8);
+}
+
+.btn-outline-light{ border-color: rgba(255,255,255,.20); }
+
+.btn-outline-light:hover{
+  border-color: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+}
+
+/* CTA acento (naranja) */
+.btn-accent{
+  background-color: var(--accent);
+  border-color: var(--accentBorder);
+  color: #0b0f15;
+  font-weight: 800;
+}
+
+.btn-accent:hover{
+  background-color: #ffb14a;
+  border-color: rgba(255,159,26,.75);
+  color: #0b0f15;
+}
+
+@media (max-width: 575.98px){
+  .hero-meta{ gap: 10px; }
+  .hero-actions .btn{ width: 100%; }
+}
+
+/* ===== Fix: títulos de Paquetes visibles (cuando Paquetes está dentro de index) ===== */
+#paquetes .card .h6,
+#paquetes .card h3{
+  color: #fff !important;
+  opacity: 1 !important;
+  font-weight: 800;
+}
+
+#paquetes .card .text-muted{
+  color: rgba(233,238,247,.72) !important;
+}
+
+/* ==============================
+   Nosotros – bloque de autoridad
+   ============================== */
+#nosotros{
+  padding-top: 72px;
+}
+
+.about-highlight{
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+
+.about-title{
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -.2px;
+  margin-bottom: 10px;
+}
+
+.about-text{
+  font-size: 15px;
+  color: rgba(233,238,247,.80);
+  max-width: 78ch;
+  line-height: 1.6;
+}
+
+/* =========================
+   Contact page additions
+   ========================= */
+.contact-hero{
+  padding: 44px 0 18px;
+}
+
+.contact-side .divider-soft{
+  border: 0;
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  margin: 0;
+}
+
+/* CTA rows */
+.contact-cta{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.12);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  margin-top: 10px;
+}
+
+.contact-cta:hover{
+  transform: translateY(-1px);
+  border-color: rgba(34,166,255,.30);
+  background: rgba(34,166,255,.06);
+  color: #fff;
+}
+
+.contact-cta-ico{
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(34,166,255,.10);
+  border: 1px solid rgba(34,166,255,.25);
+  flex: 0 0 auto;
+  font-size: 18px;
+}
+
+.contact-cta-txt{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.contact-cta-txt strong{
+  font-size: 14px;
+  letter-spacing: .2px;
+}
+
+.contact-cta-txt span{
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.contact-cta-arrow{
+  margin-left: auto;
+  opacity: .9;
+  transition: transform .18s ease, opacity .18s ease;
+  color: rgba(255,255,255,.85);
+}
+
+.contact-cta:hover .contact-cta-arrow{
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.contact-badge{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(54,214,142,.10);
+  border: 1px solid rgba(54,214,142,.20);
+  color: rgba(255,255,255,.92);
+}
+
+/* Dark form controls (usar form-control-dark en inputs) */
+.form-control-dark{
+  background: rgba(0,0,0,.18) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  color: var(--text) !important;
+  border-radius: 14px !important;
+}
+
+.form-control-dark:focus{
+  border-color: rgba(34,166,255,.40) !important;
+  box-shadow: 0 0 0 .2rem rgba(34,166,255,.12) !important;
+}
+
+.form-control-dark::placeholder{
+  color: rgba(233,238,247,.45);
+}
+
+.form-msg{
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.14);
+  color: rgba(233,238,247,.88);
+  display: none;
+}
+
+.form-msg.ok{ display: block; border-color: rgba(54,214,142,.30); }
+.form-msg.err{ display: block; border-color: rgba(255,255,255,.14); }
+
+/* Titles inside panels (contact side) */
+.panel-title{
+  color: rgba(233,238,247,.92);
+  font-weight: 750;
+  letter-spacing: -.2px;
+  margin: 0 0 12px;
+}
+
+/* =========================================================
+   LEGAL HERO — versión compacta
+   Aplica solo a páginas legales (body.legal-page)
+   ========================================================= */
+.legal-page .hero{
+  padding-top: 5.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.legal-page .hero-card{
+  padding: 2.25rem 2.5rem;
+  min-height: auto;
+}
+
+.legal-page .hero-title{
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin-bottom: .5rem;
+}
+
+.legal-page .hero-lead{
+  font-size: .95rem;
+  opacity: .8;
+  margin-bottom: 0;
+}
+
+.legal-page .hero-pill{
+  font-size: .7rem;
+  padding: .25rem .55rem;
+}
+/* =========================================
+   Button System — Boxfox1 (Global)
+   Regla: 1 CTA primario por sección
+   ========================================= */
+
+/* Azul = acción principal del sitio (Contacto) */
+.btn-primary{
+  background-color: var(--primary);
+  border-color: rgba(34,166,255,.65);
+  font-weight: 700;
+}
+.btn-primary:hover{
+  background-color:#149cff;
+  border-color: rgba(34,166,255,.8);
+}
+
+/* Naranja = CTA de cierre / conversión */
+.btn-accent{
+  background-color: var(--accent);
+  border-color: var(--accentBorder);
+  color: #0b0f15;
+  font-weight: 900;
+  letter-spacing: .1px;
+}
+.btn-accent:hover{
+  background-color: #ffb14a;
+  border-color: rgba(255,159,26,.75);
+  color: #0b0f15;
+}
+
+/* Outline oscuro = acciones secundarias */
+.btn-outline-darkglass{
+  background: rgba(0,0,0,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(233,238,247,.92);
+  font-weight: 700;
+}
+.btn-outline-darkglass:hover{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.26);
+  color: #fff;
+}
+
+/* Grupo de CTAs en bloques tipo “panel” (mejor alineación) */
+.cta-group{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* En mobile: botones full width (mobile-first) */
+@media (max-width: 575.98px){
+  .cta-group{ justify-content: stretch; }
+  .cta-group .btn{ width: 100%; }
+}
+:root{
+  --accent:#ff9f1a;
+  --accentBorder: rgba(255,159,26,.55);
+}
+/* =========================================
+   Fix: CTA final heading color
+   ========================================= */
+
+.cta-final h2,
+.cta-final h3,
+.cta-final .cta-title{
+  color: #ffffff;
+}
+
+.cta-final p{
+  color: rgba(233,238,247,.9);
+}
+/* CTA block: asegurar contraste (evita título gris) */
+.cta-block .cta-title{ color:#fff; font-weight:800; }
+.cta-block .cta-text{ color: rgba(255,255,255,.85); }
+
+/* CTA de énfasis (naranja) */
+.btn-accent {
+  background-color: #ff9f1a;       /* naranja */
+  border-color: #ff9f1a;
+  color: #0b1220;                  /* texto oscuro para contraste */
+  font-weight: 700;
+}
+
+.btn-accent:hover {
+  background-color: #ffad33;
+  border-color: #ffad33;
+  color: #0b1220;
+}
