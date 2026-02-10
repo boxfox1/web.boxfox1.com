@@ -852,3 +852,33 @@ a.card.card-dark.service-card:hover {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16) !important;
   }
 }
+/* =========================================================
+   FIX: barra blanca inferior + overscroll en móvil/tablet
+   ========================================================= */
+
+/* 1) Asegura que el fondo nunca sea blanco */
+html,
+body {
+  background: var(--bg-0) !important;
+  min-height: 100%;
+}
+
+/* 2) Evita “rebote” que enseña el fondo del navegador */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* 3) Corta overflow horizontal (causa común de franjas/flash) */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* 4) Previene que algún wrapper se pase de ancho */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
