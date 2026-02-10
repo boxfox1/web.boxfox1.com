@@ -882,3 +882,50 @@ canvas {
   max-width: 100%;
   height: auto;
 }
+/* =========================
+   NAV: Brand alignment fix
+   ========================= */
+
+/* Contenedor del brand */
+.navbar.nav-glass .navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px; /* consistente, evita variaciones */
+  line-height: 1; /* mata baseline raro */
+}
+
+/* Imagen del logo: quita el “espacio fantasma” */
+.navbar.nav-glass .navbar-brand img {
+  display: block;
+  height: 38px; /* ajusta 34–40 si quieres */
+  width: auto;
+}
+
+/* Texto "| Web" perfectamente centrado */
+.navbar.nav-glass .brand-text {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+  margin: 0; /* por si algún reset mete margin */
+  padding: 0;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+/* =========================
+   NAV: Link vertical stability
+   (evita que active cambie altura)
+   ========================= */
+.navbar.nav-glass .navbar-nav .nav-link {
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+/* Si tu .active usa borde/subrayado, evita que empuje layout */
+.navbar.nav-glass .navbar-nav .nav-link.active {
+  border-bottom: 0 !important;
+}
