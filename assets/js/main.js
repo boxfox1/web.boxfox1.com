@@ -15,14 +15,34 @@
   }
 
   /* ===============================
-     Navbar: estilo al hacer scroll
-     =============================== */
+   Navbar: estilo al hacer scroll (suave)
+   =============================== */
   const navbar = document.querySelector(".navbar.nav-glass");
   if (navbar) {
-    const onScroll = () => {
-      navbar.classList.toggle("navbar-scrolled", window.scrollY > 12);
+    let ticking = false;
+
+    // Hysteresis: entra a scrolled arriba de 24px, sale abajo de 8px
+    const ENTER = 24;
+    const EXIT = 8;
+
+    const update = () => {
+      const y = window.scrollY || 0;
+      const has = navbar.classList.contains("navbar-scrolled");
+
+      if (!has && y > ENTER) navbar.classList.add("navbar-scrolled");
+      else if (has && y < EXIT) navbar.classList.remove("navbar-scrolled");
+
+      ticking = false;
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
@@ -34,9 +54,10 @@
   const navLinks = document.querySelectorAll(".navbar .nav-link");
 
   if (navLinks.length) {
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const currentPath =
+      window.location.pathname.split("/").pop() || "index.html";
 
-    navLinks.forEach(link => {
+    navLinks.forEach((link) => {
       const href = link.getAttribute("href");
       if (!href) return;
 
@@ -77,7 +98,7 @@
         const response = await fetch(form.action, {
           method: form.method || "POST",
           body: new FormData(form),
-          headers: { "Accept": "application/json" }
+          headers: { Accept: "application/json" },
         });
 
         if (response.ok) {
@@ -86,7 +107,8 @@
 
           if (formMsg) {
             formMsg.className = "form-msg ok";
-            formMsg.textContent = "Mensaje enviado correctamente. Te contactaremos pronto.";
+            formMsg.textContent =
+              "Mensaje enviado correctamente. Te contactaremos pronto.";
           }
         } else {
           throw new Error("Form error");
@@ -94,7 +116,8 @@
       } catch (err) {
         if (formMsg) {
           formMsg.className = "form-msg err";
-          formMsg.textContent = "Ocurrió un error. Intenta nuevamente o contáctanos por WhatsApp.";
+          formMsg.textContent =
+            "Ocurrió un error. Intenta nuevamente o contáctanos por WhatsApp.";
         }
       } finally {
         if (submitBtn) {
@@ -104,5 +127,4 @@
       }
     });
   }
-
 })();
