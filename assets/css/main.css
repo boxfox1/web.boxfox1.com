@@ -237,27 +237,25 @@ section[id] {
   margin-right: 6px;
   color: rgba(255, 255, 255, 0.75);
 }
-/* ===== Hero: default fluido (tablet / móvil / híbridos) ===== */
-.hero .hero-card {
-  min-height: auto;
-}
 
-.hero .hero-figure {
-  height: auto;
-  width: 100%;
+.hero-figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
   padding: 8px 0;
 }
 
-.hero .hero-image {
+.hero-image {
   width: 100%;
-  height: auto;
   max-width: 560px;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  border-radius: 20px;
+  opacity: 0.96;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
 }
 
-/* ===== Hero “fijo” SOLO en pantallas grandes (desktop real) ===== */
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .hero .hero-card {
     min-height: var(--heroH);
   }
@@ -824,4 +822,40 @@ a.card.card-dark.service-card:hover {
   background-color: #ffad33;
   border-color: #ffad33;
   color: #0b1220;
+}
+/* ===============================
+   FIX: scroll-jitter móvil/tablet por navbar glass + fixed
+   =============================== */
+
+/* 1) La navbar NO debe cambiar tamaño al hacer scroll */
+.navbar.nav-glass {
+  height: 72px; /* AJUSTA si tu navbar real es distinta */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: flex;
+  align-items: center;
+
+  /* composición estable */
+  transform: translateZ(0);
+  will-change: background-color, box-shadow;
+}
+
+/* 2) Si tu navbar es fixed/sticky, compensa el contenido */
+body {
+  padding-top: 72px; /* MISMO valor que height arriba */
+}
+
+/* 3) El estado scrolled SOLO cambia color/sombra (no padding/height) */
+.navbar.nav-glass.navbar-scrolled {
+  background: rgba(10, 18, 30, 0.92) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* 4) En móvil/tablet desactiva backdrop-filter (causa clásica de jitter) */
+@media (max-width: 1024px) {
+  .navbar.nav-glass {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(10, 18, 30, 0.92) !important;
+  }
 }
