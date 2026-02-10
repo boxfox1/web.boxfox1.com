@@ -15,34 +15,14 @@
   }
 
   /* ===============================
-   Navbar: estilo al hacer scroll (suave)
-   =============================== */
+     Navbar: estilo al hacer scroll
+     =============================== */
   const navbar = document.querySelector(".navbar.nav-glass");
   if (navbar) {
-    let ticking = false;
-
-    // Hysteresis: entra a scrolled arriba de 24px, sale abajo de 8px
-    const ENTER = 24;
-    const EXIT = 8;
-
-    const update = () => {
-      const y = window.scrollY || 0;
-      const has = navbar.classList.contains("navbar-scrolled");
-
-      if (!has && y > ENTER) navbar.classList.add("navbar-scrolled");
-      else if (has && y < EXIT) navbar.classList.remove("navbar-scrolled");
-
-      ticking = false;
-    };
-
     const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
+      navbar.classList.toggle("navbar-scrolled", window.scrollY > 12);
     };
-
-    update();
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 

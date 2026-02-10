@@ -136,14 +136,6 @@ section[id] {
     rgba(8, 12, 18, 0)
   );
 }
-/* Reduce jitter en móvil/tablet si usas glass (backdrop-filter) */
-@media (max-width: 992px) {
-  .navbar.nav-glass {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-    background: rgba(10, 18, 30, 0.92) !important;
-  }
-}
 
 .navbar.nav-glass.navbar-scrolled {
   background: rgba(8, 12, 18, 0.78) !important;
@@ -245,25 +237,27 @@ section[id] {
   margin-right: 6px;
   color: rgba(255, 255, 255, 0.75);
 }
+/* ===== Hero: default fluido (tablet / móvil / híbridos) ===== */
+.hero .hero-card {
+  min-height: auto;
+}
 
-.hero-figure {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
+.hero .hero-figure {
+  height: auto;
+  width: 100%;
   padding: 8px 0;
 }
 
-.hero-image {
+.hero .hero-image {
   width: 100%;
-  max-width: 560px;
   height: auto;
-  border-radius: 20px;
-  opacity: 0.96;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
+  max-width: 560px;
+  object-fit: cover;
+  object-position: center;
 }
 
-@media (min-width: 992px) {
+/* ===== Hero “fijo” SOLO en pantallas grandes (desktop real) ===== */
+@media (min-width: 1200px) {
   .hero .hero-card {
     min-height: var(--heroH);
   }
