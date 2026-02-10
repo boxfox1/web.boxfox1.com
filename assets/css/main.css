@@ -147,6 +147,11 @@ section[id] {
   letter-spacing: 0.2px;
 }
 
+.navbar .container{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 /* NAV — activo más notorio (bold + underline sutil) */
 .navbar .nav-link {
   font-weight: 500;
