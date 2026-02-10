@@ -929,3 +929,36 @@ canvas {
 .navbar.nav-glass .navbar-nav .nav-link.active {
   border-bottom: 0 !important;
 }
+/* FIX: evitar traslape logo + " | Web" en navbar */
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* controla separación real */
+  min-width: 0; /* permite truncar si hace falta */
+}
+
+.navbar .navbar-brand img {
+  display: block; /* evita baseline/descenso raro */
+  height: 28px; /* tu valor actual */
+  width: auto;
+}
+
+.navbar .brand-text {
+  display: inline-block;
+  line-height: 1; /* clave para que no “suba/baje” */
+  margin-left: 2px; /* micro separador */
+  white-space: nowrap; /* evita salto */
+  opacity: 0.95;
+}
+
+/* Si el logo largo queda muy justo en ciertos anchos, baja un poco el texto */
+@media (max-width: 1200px) {
+  .navbar .brand-text {
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 992px) {
+  .navbar .brand-text {
+    display: none;
+  } /* en móvil: solo logo */
+}
