@@ -823,54 +823,32 @@ a.card.card-dark.service-card:hover {
   border-color: #ffad33;
   color: #0b1220;
 }
-/* ===============================
-   FIX: scroll-jitter móvil/tablet por navbar glass + fixed
-   =============================== */
-
-/* 1) La navbar NO debe cambiar tamaño al hacer scroll */
-.navbar.nav-glass {
-  height: 72px; /* AJUSTA si tu navbar real es distinta */
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  display: flex;
-  align-items: center;
-
-  /* composición estable */
-  transform: translateZ(0);
-  will-change: background-color, box-shadow;
-}
-
-/* 2) Si tu navbar es fixed/sticky, compensa el contenido */
-body {
-  padding-top: 72px; /* MISMO valor que height arriba */
-}
-
-/* 3) El estado scrolled SOLO cambia color/sombra (no padding/height) */
-.navbar.nav-glass.navbar-scrolled {
-  background: rgba(10, 18, 30, 0.92) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-/* 4) En móvil/tablet desactiva backdrop-filter (causa clásica de jitter) */
+/* =========================================================
+   Performance mode (móvil/tablet): elimina jank en scroll
+   ========================================================= */
 @media (max-width: 1024px) {
+  /* 1) Sombras: reduce blur fuerte (principal causa de lag) */
+  :root {
+    --shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  /* 2) Quita filtros caros */
+  .hero-image {
+    filter: none !important; /* drop-shadow es caro en scroll */
+  }
+
+  /* 3) Navbar glass: desactiva blur si existe */
   .navbar.nav-glass {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
     background: rgba(10, 18, 30, 0.92) !important;
   }
-}
-/* Performance: reduce jank en móvil/tablet */
-@media (max-width: 1024px) {
-  .hero-image {
-    filter: none !important; /* mata el drop-shadow (carísimo) */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); /* alternativa más barata */
-  }
-}
-@media (max-width: 1024px) {
-  .card,
+
+  /* 4) Si tienes muchas cards, baja sombras todavía más */
   .hero-card,
+  .card,
   .service-card,
   .pricing-card {
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16) !important;
   }
 }
