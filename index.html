@@ -23,6 +23,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://web.boxfox1.com/" />
+    <meta property="og:image" content="https://web.boxfox1.com/assets/img/og-image.jpg" />
 
     <!-- Favicons -->
     <link rel="icon" href="favicon.ico" />
@@ -54,22 +55,28 @@
     />
 
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/main.css?v=102" />
+    <link rel="stylesheet" href="assets/css/main.css?v=103" />
   </head>
 
   <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido</a>
+
     <div class="page-bg">
       <!-- NAV -->
-      <nav class="navbar navbar-expand-lg navbar-dark nav-glass fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark nav-glass fixed-top" aria-label="Navegación principal">
         <div class="container">
           <a
-            class="navbar-brand d-flex align-items-center gap-2"
+            class="navbar-brand"
             href="https://web.boxfox1.com/"
+            aria-label="Boxfox1 Web - Inicio"
           >
             <img
               src="assets/img/boxfox1.logo.webp"
-              alt="Boxfox1 logo"
+              alt=""
               height="28"
+              width="auto"
+              loading="eager"
             />
             <span class="brand-text">| Web</span>
           </a>
@@ -89,23 +96,19 @@
           <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
               <li class="nav-item">
-                <a class="nav-link active" href="index.html#inicio">Inicio</a>
+                <a class="nav-link" href="index.html#inicio">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="servicios.html#servicios"
-                  >Servicios</a
-                >
+                <a class="nav-link" href="servicios.html#servicios">Servicios</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="agencia-web.html#agenciaweb"
-                  >Agencia</a
-                >
+                <a class="nav-link" href="agencia-web.html#agenciaweb">Agencia</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="seo.html">SEO</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link" href="software.html#software">Software</a>
+                <a class="nav-link" href="software.html#software">Software</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="paquetes.html">Paquetes</a>
@@ -114,9 +117,7 @@
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="impacto-social.html#impactosocial"
-                  >Apoyo</a
-                >
+                <a class="nav-link" href="impacto-social.html#impactosocial">Apoyo</a>
               </li>
 
               <li class="nav-item ms-lg-2">
@@ -129,71 +130,75 @@
         </div>
       </nav>
 
-      <!-- HERO -->
-      <header id="inicio" class="hero">
-        <div class="container">
-          <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-              <div class="hero-card">
-                <span class="hero-pill">
-                  <i class="bi bi-stars"></i> Agencia creativa · Web + SEO
-                  orgánico
-                </span>
+      <main id="main-content">
+        <!-- HERO -->
+        <header id="inicio" class="hero">
+          <div class="container">
+            <div class="row align-items-center g-4">
+              <div class="col-lg-7">
+                <div class="hero-card">
+                  <span class="hero-pill">
+                    <i class="bi bi-stars"></i> Agencia creativa · Web + SEO
+                    orgánico
+                  </span>
 
-                <h1 class="hero-title">
-                  Haz lo que te gusta,<br class="d-none d-md-block" />
-                  nosotros lo mostramos al mundo.
-                </h1>
+                  <h1 class="hero-title">
+                    Haz lo que te gusta,<br class="d-none d-md-block" />
+                    nosotros lo mostramos al mundo.
+                  </h1>
 
-                <p class="hero-lead">
-                  Diseñamos sitios rápidos, claros y enfocados a conversión.
-                  Integramos SEO técnico + contenido para que te encuentren.
-                </p>
+                  <p class="hero-lead">
+                    Diseñamos sitios rápidos, claros y enfocados a conversión.
+                    Integramos SEO técnico + contenido para que te encuentren.
+                  </p>
 
-                <div class="hero-actions">
-                  <a class="btn btn-primary" href="#servicios"
-                    ><i class="bi bi-grid"></i> Ver servicios</a
-                  >
-                  <a class="btn btn-outline-light" href="#seo"
-                    ><i class="bi bi-graph-up"></i> Estrategia SEO</a
-                  >
-                  <a
-                    class="btn btn-success"
-                    href="https://wa.me/4444989198?text=WEB.Boxfox1"
-                    ><i class="bi bi-whatsapp"></i> Mándanos un whats</a
-                  >
-                </div>
+                  <div class="hero-actions">
+                    <a class="btn btn-primary" href="#servicios"
+                      ><i class="bi bi-grid"></i> Ver servicios</a
+                    >
+                    <a class="btn btn-outline-light" href="#seo"
+                      ><i class="bi bi-graph-up"></i> Estrategia SEO</a
+                    >
+                    <a
+                      class="btn btn-success"
+                      href="https://wa.me/5214444989198?text=WEB.Boxfox1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><i class="bi bi-whatsapp"></i> Mándanos un whats</a
+                    >
+                  </div>
 
-                <div class="hero-meta">
-                  <span class="meta-item"
-                    ><i class="bi bi-lightning-charge"></i> Performance</span
-                  >
-                  <span class="meta-item"
-                    ><i class="bi bi-shield-check"></i> Seguridad</span
-                  >
-                  <span class="meta-item"
-                    ><i class="bi bi-search"></i> SEO</span
-                  >
+                  <div class="hero-meta">
+                    <span class="meta-item"
+                      ><i class="bi bi-lightning-charge"></i> Performance</span
+                    >
+                    <span class="meta-item"
+                      ><i class="bi bi-shield-check"></i> Seguridad</span
+                    >
+                    <span class="meta-item"
+                      ><i class="bi bi-search"></i> SEO</span
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-lg-5">
-              <div class="hero-figure">
-                <img
-                  class="hero-image"
-                  src="assets/img/boxfox1-hero.webp"
-                  alt="Ilustración de SEO, analítica web y crecimiento digital"
-                  loading="eager"
-                  decoding="async"
-                />
+              <div class="col-lg-5">
+                <div class="hero-figure">
+                  <img
+                    class="hero-image"
+                    src="assets/img/boxfox1-hero.webp"
+                    alt="Ilustración de SEO, analítica web y crecimiento digital"
+                    loading="eager"
+                    decoding="async"
+                    width="560"
+                    height="420"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main>
         <!-- SERVICIOS -->
         <section id="servicios" class="section">
           <div class="container">
@@ -207,7 +212,7 @@
               <div class="col-md-6 col-lg-3">
                 <a
                   class="card card-dark text-decoration-none service-card"
-                  href="#paquetes"
+                  href="paquetes.html#diseno-web"
                 >
                   <div class="service-icon"><i class="bi bi-window"></i></div>
                   <h3 class="service-title">Diseño Web</h3>
@@ -221,7 +226,7 @@
               <div class="col-md-6 col-lg-3">
                 <a
                   class="card card-dark text-decoration-none service-card"
-                  href="#seo"
+                  href="seo.html"
                 >
                   <div class="service-icon"><i class="bi bi-search"></i></div>
                   <h3 class="service-title">SEO orgánico</h3>
@@ -235,7 +240,7 @@
               <div class="col-md-6 col-lg-3">
                 <a
                   class="card card-dark text-decoration-none service-card"
-                  href="#paquetes"
+                  href="paquetes.html#hosting"
                 >
                   <div class="service-icon">
                     <i class="bi bi-hdd-network"></i>
@@ -250,7 +255,7 @@
               <div class="col-md-6 col-lg-3">
                 <a
                   class="card card-dark text-decoration-none service-card"
-                  href="#paquetes"
+                  href="paquetes.html#publicidad"
                 >
                   <div class="service-icon"><i class="bi bi-badge-ad"></i></div>
                   <h3 class="service-title">Publicidad digital</h3>
@@ -263,81 +268,58 @@
           </div>
         </section>
 
-<!-- SEO & SOFTWARE -->
-<section id="seo" class="section section--compact">
-  <div class="container">
+        <!-- SEO & SOFTWARE -->
+        <section id="seo" class="section section--compact">
+          <div class="container">
+            <h2 class="section-title mb-4">Visibilidad + Control</h2>
+            <p class="section-subtitle mb-5">
+              Primero te posicionamos. Después te ayudamos a operar con sistemas.
+            </p>
 
-<h2 class="section-title mb-4">
-  Visibilidad + Control
-</h2>
+            <div class="row g-4">
+              <!-- BLOQUE SEO -->
+              <div class="col-lg-6">
+                <div class="card card-dark p-5 h-100">
+                  <h3 class="mb-3">SEO orgánico (en serio)</h3>
+                  <p class="text-muted mb-4">
+                    Antes de automatizar, hay que ser visible. Optimizamos tu sitio para que
+                    te encuentren, confíen y conviertan: velocidad, estructura y contenido con intención.
+                  </p>
+                  <ul class="checklist mb-4">
+                    <li>Core Web Vitals: LCP / INP / CLS</li>
+                    <li>Arquitectura: servicios → casos → blog</li>
+                    <li>SEO on-page + Schema estructurado</li>
+                    <li>GA4 + eventos: leads, WhatsApp, conversiones</li>
+                  </ul>
+                  <a class="btn btn-primary mt-auto" href="seo.html">
+                    Ver página de SEO
+                  </a>
+                </div>
+              </div>
 
-<p class="section-subtitle mb-5">
-  Primero te posicionamos. Después te ayudamos a operar con sistemas.
-</p>
-
-
-    <div class="row g-4">
-
-      <!-- BLOQUE SEO -->
-      <div class="col-lg-6">
-<div class="card card-dark p-5 h-100">
-
-  <h3 class="mb-3">
-    SEO orgánico (en serio)
-  </h3>
-
-  <p class="text-muted mb-4">
-    Antes de automatizar, hay que ser visible. Optimizamos tu sitio para que
-    te encuentren, confíen y conviertan: velocidad, estructura y contenido con intención.
-  </p>
-
-  <ul class="checklist mb-4">
-    <li>Core Web Vitals: LCP / INP / CLS</li>
-    <li>Arquitectura: servicios → casos → blog</li>
-    <li>SEO on-page + Schema estructurado</li>
-    <li>GA4 + eventos: leads, WhatsApp, conversiones</li>
-  </ul>
-
-  <a class="btn btn-primary mt-auto" href="seo.html">
-    Ver página de SEO
-  </a>
-
-</div>
-
-      </div>
-
-      <!-- BLOQUE SOFTWARE -->
-      <div class="col-lg-6">
-<div class="card card-dark p-5 h-100">
-
-  <h3 class="mb-3">
-    Software & Automatización
-  </h3>
-
-  <p class="text-muted mb-4">
-    Cuando el marketing empieza a funcionar y los procesos crecen,
-    necesitas sistemas que soporten el orden y la operación.
-    Construimos soluciones web para empresas en expansión.
-  </p>
-
-  <ul class="checklist mb-4">
-    <li>Sistemas internos y portales operativos</li>
-    <li>Dashboards y KPIs ejecutivos</li>
-    <li>Automatización de procesos comerciales y administrativos</li>
-    <li>Integraciones y control de evidencia digital</li>
-  </ul>
-
-  <a class="btn btn-success mt-auto" href="software.html#soluciones">
-    Ver Software
-  </a>
-
-</div>
-
-
-    </div>
-  </div>
-</section>
-
+              <!-- BLOQUE SOFTWARE -->
+              <div class="col-lg-6">
+                <div class="card card-dark p-5 h-100">
+                  <h3 class="mb-3">Software & Automatización</h3>
+                  <p class="text-muted mb-4">
+                    Cuando el marketing empieza a funcionar y los procesos crecen,
+                    necesitas sistemas que soporten el orden y la operación.
+                    Construimos soluciones web para empresas en expansión.
+                  </p>
+                  <ul class="checklist mb-4">
+                    <li>Sistemas internos y portales operativos</li>
+                    <li>Dashboards y KPIs ejecutivos</li>
+                    <li>Automatización de procesos comerciales y administrativos</li>
+                    <li>Integraciones y control de evidencia digital</li>
+                  </ul>
+                  <a class="btn btn-success mt-auto" href="software.html#soluciones">
+                    Ver Software
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <!-- PAQUETES -->
         <section id="paquetes" class="section section--alt">
@@ -350,53 +332,49 @@
             <div class="row g-4 mt-2">
               <div class="col-lg-4">
                 <div class="card card-dark p-4 h-100">
-                  <h3 class="h8 mb-2">Básico</h3>
+                  <h3 class="h4 mb-2">Básico</h3>
                   <p class="text-muted">Landing + formulario + GA4 básico.</p>
                   <ul class="checklist">
-                    <li>1 landing</li>
+                    <li>1 landing page</li>
                     <li>SEO técnico base</li>
                     <li>Medición de leads</li>
                   </ul>
-                  <a class="btn btn-primary mt-3 w-100" href="contacto.html"
-                    >Cotizar</a
-                  >
+                  <a class="btn btn-primary mt-3 w-100" href="contacto.html?package=basico">Cotizar</a>
                 </div>
               </div>
 
               <div class="col-lg-4">
                 <div class="card card-dark p-4 h-100">
-                  <h3 class="h8 mb-2">Pro</h3>
+                  <h3 class="h4 mb-2">Pro</h3>
                   <p class="text-muted">
                     Sitio + páginas de servicio + SEO on-page.
                   </p>
                   <ul class="checklist">
                     <li>Hasta 6 páginas</li>
-                    <li>SEO on-page</li>
-                    <li>Eventos GA4</li>
+                    <li>SEO on-page completo</li>
+                    <li>Eventos GA4 personalizados</li>
                   </ul>
-                  <a class="btn btn-primary mt-3 w-100" href="contacto.html"
-                    >Cotizar</a
-                  >
+                  <a class="btn btn-primary mt-3 w-100" href="contacto.html?package=pro">Cotizar</a>
                 </div>
               </div>
 
               <div class="col-lg-4">
                 <div class="card card-dark p-4 h-100">
-                  <h3 class="h8 mb-2">Growth</h3>
+                  <h3 class="h4 mb-2">Growth</h3>
                   <p class="text-muted">
                     SEO + contenido + optimización continua.
                   </p>
                   <ul class="checklist">
-                    <li>Roadmap SEO</li>
-                    <li>Contenido mensual</li>
-                    <li>Mejoras performance</li>
+                    <li>Roadmap SEO estratégico</li>
+                    <li>Contenido mensual optimizado</li>
+                    <li>Mejoras de performance continuas</li>
                   </ul>
                   <a
                     class="btn btn-success mt-3 w-100"
-                    href="https://wa.me/4444989198?text=WEB.Boxfox1
-"
-                    >Agendar por whatsapp</a
-                  >
+                    href="https://wa.me/5214444989198?text=WEB.Boxfox1%20-%20Paquete%20Growth"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Agendar por WhatsApp</a>
                 </div>
               </div>
             </div>
@@ -407,7 +385,6 @@
         <section id="nosotros" class="section">
           <div class="container">
             <h2 class="section-title">Nosotros</h2>
-
             <p class="section-subtitle">
               Boxfox1 Web es la unidad de <strong>agencia digital</strong> del
               ecosistema Boxfox1. Diseñamos y desarrollamos sitios rápidos,
@@ -436,147 +413,134 @@
             </div>
           </div>
         </section>
+      </main>
 
-        <!-- FOOTER -->
-        <footer class="footer">
-          <div class="container">
-            <div class="row g-4">
-              <div class="col-lg-4">
-                <div class="footer-title">Boxfox1 Web</div>
-                <p class="footer-small mb-3">
-                  Diseño, SEO y presencia digital.
-                </p>
-                <div class="d-flex gap-3">
-                  <a
-                    class="footer-social"
-                    href="https://www.youtube.com/@Boxfox1"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="YouTube"
-                    ><i class="bi bi-youtube"></i
-                  ></a>
-                  <a
-                    class="footer-social"
-                    href="https://www.facebook.com/boxfox1/"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="Facebook"
-                    ><i class="bi bi-facebook"></i
-                  ></a>
-                  <a
-                    class="footer-social"
-                    href="https://x.com/Boxfox1"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="X (Twitter) Boxfox1"
-                    ><i class="bi bi-twitter-x"></i
-                  ></a>
-                  <a
-                    class="footer-social"
-                    href="https://www.instagram.com/boxfox1/"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="Instagram"
-                    ><i class="bi bi-instagram"></i
-                  ></a>
-                  <a
-                    class="footer-social"
-                    href="https://www.pinterest.com/boxfox1/"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="Pinterest"
-                    ><i class="bi bi-pinterest"></i
-                  ></a>
-                  <a
-                    class="footer-social"
-                    href="https://www.linkedin.com/company/boxfox1/"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label="LinkedIn"
-                    ><i class="bi bi-linkedin"></i
-                  ></a>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="footer-title">Otros sitios</div>
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a
-                      id="link-boxfox1-blog"
-                      class="footer-link"
-                      href="https://www.boxfox1.com"
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      aria-label="Boxfox1 Autos y Relojes"
-                      data-track="footer_other_site"
-                      data-site="boxfox1_blog"
-                      >Autos y relojes (Estilo)</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      id="link-boxfox1-industrial"
-                      class="footer-link"
-                      href="https://servicios.boxfox1.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Boxfox1 Industrial"
-                      data-track="footer_other_site"
-                      data-site="boxfox1_industrial"
-                      >Servicios Boxfox1 (Industrial)</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      id="link-boxfox1-prehispanico"
-                      class="footer-link"
-                      href="https://prehispanico.boxfox1.com"
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      aria-label="Prehispánico Boxfox1, investigación y contenido cultural"
-                      data-track="footer_other_site"
-                      data-site="boxfox1_prehispanico"
-                      >Prehispánico (investigación)</a
-                    >
-                  </li>
-                </ul>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="footer-title">Contacto</div>
-                <p class="footer-small mb-2">
-                  Cotiza rápido por el formulario.
-                </p>
-                <a class="btn btn-primary w-100" href="contacto.html"
-                  >Abrir contacto</a
-                >
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="footer-title">Boxfox1 Web</div>
+              <p class="footer-small mb-3">
+                Diseño, SEO y presencia digital.
+              </p>
+              <div class="d-flex gap-3">
+                <a
+                  class="footer-social"
+                  href="https://www.youtube.com/@Boxfox1"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="YouTube"
+                  ><i class="bi bi-youtube"></i
+                ></a>
+                <a
+                  class="footer-social"
+                  href="https://www.facebook.com/boxfox1/"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a
+                  class="footer-social"
+                  href="https://x.com/Boxfox1"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="X (Twitter) Boxfox1"
+                  ><i class="bi bi-twitter-x"></i
+                ></a>
+                <a
+                  class="footer-social"
+                  href="https://www.instagram.com/boxfox1/"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a
+                  class="footer-social"
+                  href="https://www.pinterest.com/boxfox1/"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="Pinterest"
+                  ><i class="bi bi-pinterest"></i
+                ></a>
+                <a
+                  class="footer-social"
+                  href="https://www.linkedin.com/company/boxfox1/"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
               </div>
             </div>
 
-            <div
-              class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2"
-            >
-              <small class="text-secondary"
-                >Corporativo Boxfox1 © <span id="year"></span>. Todos los derechos reservados.</small
-              >
-              <small class="d-flex gap-3">
-                <a
-                  class="footer-link footer-easter"
-                  href="/mb/mario.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Playroom Boxfox1"
-                  >Playroom</a
-                >
-                <a class="footer-link" href="terminos-y-condiciones.html"
-                  >Términos y Condiciones</a
-                >
-              </small>
+            <div class="col-lg-4">
+              <div class="footer-title">Otros sitios</div>
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a
+                    class="footer-link"
+                    href="https://www.boxfox1.com"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    aria-label="Boxfox1 Autos y Relojes"
+                    >Autos y relojes (Estilo)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer-link"
+                    href="https://servicios.boxfox1.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Boxfox1 Industrial"
+                    >Servicios Boxfox1 (Industrial)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer-link"
+                    href="https://prehispanico.boxfox1.com"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    aria-label="Prehispánico Boxfox1, investigación y contenido cultural"
+                    >Prehispánico (investigación)</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="footer-title">Contacto</div>
+              <p class="footer-small mb-2">
+                Cotiza rápido por el formulario.
+              </p>
+              <a class="btn btn-primary w-100" href="contacto.html">Abrir contacto</a>
             </div>
           </div>
-        </footer>
-      </main>
+
+          <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+            <small class="text-secondary"
+              >Corporativo Boxfox1 © <span id="year"></span>. Todos los derechos reservados.</small
+            >
+            <small class="d-flex gap-3">
+              <a
+                class="footer-link footer-easter"
+                href="/mb/mario.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Playroom Boxfox1"
+                >Playroom</a
+              >
+              <a class="footer-link" href="terminos-y-condiciones.html"
+                >Términos y Condiciones</a
+              >
+            </small>
+          </div>
+        </div>
+      </footer>
     </div>
     <!-- /.page-bg -->
 

@@ -1,5 +1,5 @@
 /* =========================================================
-   Boxfox1 Web — main.css (clean + anti-banding)
+   Boxfox1 Web — main.css (Optimized + Fixed)
    ========================================================= */
 
 /* ============ Base / Theme ============ */
@@ -17,8 +17,6 @@
 
   --primary: #22a6ff;
   --success: #36d68e;
-
-  /* CTA accent (naranja) */
   --accent: #ff9f1a;
   --accentBorder: rgba(255, 159, 26, 0.55);
 
@@ -26,19 +24,31 @@
   --radius: 18px;
 
   --heroH: 420px;
-  --navOffset: 96px; /* offset para anchors */
+  --navOffset: 80px; /* Adjusted for better anchor scrolling */
 }
 
-html,
-body {
+/* ============ Global Reset & Base ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: scroll; /* Always show scrollbar to prevent layout shift */
   height: 100%;
 }
 
 body {
   margin: 0;
   color: var(--text);
-  padding-top: 76px; /* nav fixed */
+  padding-top: 76px;
   text-rendering: optimizeLegibility;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100%;
 
   /* Fondo continuo */
   background:
@@ -54,7 +64,6 @@ body {
     ),
     linear-gradient(180deg, var(--bg-0), var(--bg-1) 45%, var(--bg-0));
 
-  /* Reduce banding al scrollear */
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
@@ -66,7 +75,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.035; /* 0.02–0.06 */
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
   background-size: 220px 220px;
   mix-blend-mode: overlay;
@@ -80,12 +89,39 @@ body > * {
 
 a {
   color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
+
 a:hover {
   color: #fff;
 }
+
 .text-muted {
   color: var(--muted) !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============ Skip to content (accessibility) ============ */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-to-content:focus {
+  top: 0;
 }
 
 /* ============ Anchor offset (navbar fixed) ============ */
@@ -94,31 +130,30 @@ section[id] {
   scroll-margin-top: var(--navOffset);
 }
 
-@media (max-width: 991.98px) {
-  body {
-    padding-top: 72px;
-  }
-  :root {
-    --navOffset: 88px;
-  }
-}
-
 /* ============ Navbar ============ */
 .navbar.nav-glass {
   position: fixed;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 1030;
-
   border-bottom: 0 !important;
   box-shadow: none !important;
-
   background: rgba(8, 12, 18, 0.58) !important;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+/* FIX: Ensure navbar doesn't overlap scrollbar */
+@supports (padding: max(0px)) {
+  .navbar.nav-glass {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
 }
 
 /* “Feather” corto para evitar costura bajo el menú */
@@ -129,6 +164,7 @@ section[id] {
   right: 0;
   bottom: -10px;
   height: 10px;
+  width: 100%;
   pointer-events: none;
   background: linear-gradient(
     180deg,
@@ -142,15 +178,45 @@ section[id] {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28) !important;
 }
 
-.navbar .brand-text {
-  font-weight: 600;
-  letter-spacing: 0.2px;
+/* Navbar brand */
+.navbar.nav-glass .navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px;
+  line-height: 1;
 }
 
-/* NAV — activo más notorio (bold + underline sutil) */
+.navbar.nav-glass .navbar-brand img {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.navbar.nav-glass .brand-text {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+/* Navbar links */
 .navbar .nav-link {
   font-weight: 500;
   opacity: 0.92;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+  transition: opacity 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+  opacity: 1;
 }
 
 .navbar .nav-link.active {
@@ -171,10 +237,20 @@ section[id] {
   background: rgba(34, 166, 255, 0.65);
 }
 
+/* Focus states for accessibility */
+.navbar .nav-link:focus-visible,
+.navbar .navbar-brand:focus-visible,
+.navbar-toggler:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ============ Hero ============ */
 .hero {
   padding: 44px 0 18px;
 }
+
 .hero .row {
   align-items: center;
 }
@@ -242,7 +318,6 @@ section[id] {
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
   padding: 8px 0;
 }
 
@@ -279,6 +354,7 @@ section[id] {
 .section {
   padding: 60px 0;
 }
+
 .section--alt {
   background: transparent !important;
   border: 0 !important;
@@ -299,7 +375,6 @@ section[id] {
 /* ============ Cards ============ */
 .card-dark {
   background: var(--cardSolid) !important;
-  background-image: none !important;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
@@ -307,10 +382,7 @@ section[id] {
 
 .service-card {
   padding: 18px 18px 16px;
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 a.card.card-dark.service-card:hover {
@@ -344,23 +416,14 @@ a.card.card-dark.service-card:hover {
   font-size: 16px;
 }
 
-/* Headings dentro de cards oscuras siempre legibles */
 .card-dark h3,
+.card-dark .h4,
 .card-dark .h6 {
   color: #fff;
   font-weight: 800;
 }
 
-/* SEO panel */
-.seo-panel {
-  padding: 18px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--cardSolid);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-}
-
-/* Checklist */
+/* ============ Checklist ============ */
 .checklist {
   list-style: none;
   padding-left: 0;
@@ -383,155 +446,7 @@ a.card.card-dark.service-card:hover {
   font-weight: 800;
 }
 
-/* ============ Footer ============ */
-.footer {
-  padding: 44px 0 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.footer-title {
-  font-weight: 950;
-}
-.footer-small {
-  color: var(--muted);
-}
-
-.footer-link {
-  color: rgba(255, 255, 255, 0.78);
-  text-decoration: none;
-}
-
-.footer-link:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.footer-social {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 20px;
-  line-height: 1;
-  text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.footer-social:hover {
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-.footer-bottom {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Footer list — chevron + animation */
-.footer ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.footer ul li {
-  position: relative;
-  padding-left: 14px;
-  margin: 10px 0;
-}
-
-.footer ul li::before {
-  content: "›";
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 22px;
-  line-height: 1;
-  color: rgba(34, 166, 255, 0.75);
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.footer ul li:hover::before {
-  transform: translateX(4px);
-  color: #22a6ff;
-  opacity: 1;
-}
-
-.footer ul li a {
-  display: inline-block;
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease;
-}
-
-.footer ul li:hover a {
-  transform: translateX(4px);
-  color: #fff;
-}
-
-/* ============ Buttons ============ */
-.btn-primary {
-  background-color: var(--primary);
-  border-color: rgba(34, 166, 255, 0.65);
-}
-
-.btn-primary:hover {
-  background-color: #149cff;
-  border-color: rgba(34, 166, 255, 0.8);
-}
-
-.btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-outline-light:hover {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* CTA acento (naranja) */
-.btn-accent {
-  background-color: var(--accent);
-  border-color: var(--accentBorder);
-  color: #0b0f15;
-  font-weight: 800;
-}
-
-.btn-accent:hover {
-  background-color: #ffb14a;
-  border-color: rgba(255, 159, 26, 0.75);
-  color: #0b0f15;
-}
-
-@media (max-width: 575.98px) {
-  .hero-meta {
-    gap: 10px;
-  }
-  .hero-actions .btn {
-    width: 100%;
-  }
-}
-
-/* ===== Fix: títulos de Paquetes visibles (cuando Paquetes está dentro de index) ===== */
-#paquetes .card .h6,
-#paquetes .card h3 {
-  color: #fff !important;
-  opacity: 1 !important;
-  font-weight: 800;
-}
-
-#paquetes .card .text-muted {
-  color: rgba(233, 238, 247, 0.72) !important;
-}
-
-/* ==============================
-   Nosotros – bloque de autoridad
-   ============================== */
+/* ============ About section ============ */
 #nosotros {
   padding-top: 72px;
 }
@@ -557,114 +472,186 @@ a.card.card-dark.service-card:hover {
   line-height: 1.6;
 }
 
-/* =========================
-   Contact page additions
-   ========================= */
-.contact-hero {
-  padding: 44px 0 18px;
+.about-bullets {
+  list-style: none;
+  padding-left: 0;
 }
 
-.contact-side .divider-soft {
-  border: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 0;
-}
-
-/* CTA rows */
-.contact-cta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.12);
-  text-decoration: none;
-  color: var(--text);
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
-  margin-top: 10px;
-}
-
-.contact-cta:hover {
-  transform: translateY(-1px);
-  border-color: rgba(34, 166, 255, 0.3);
-  background: rgba(34, 166, 255, 0.06);
-  color: #fff;
-}
-
-.contact-cta-ico {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: rgba(34, 166, 255, 0.1);
-  border: 1px solid rgba(34, 166, 255, 0.25);
-  flex: 0 0 auto;
-  font-size: 18px;
-}
-
-.contact-cta-txt {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  min-width: 0;
-}
-
-.contact-cta-txt strong {
-  font-size: 14px;
-  letter-spacing: 0.2px;
-}
-
-.contact-cta-txt span {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.contact-cta-arrow {
-  margin-left: auto;
-  opacity: 0.9;
-  transition:
-    transform 0.18s ease,
-    opacity 0.18s ease;
+.about-bullets li {
+  position: relative;
+  padding-left: 20px;
+  margin: 8px 0;
   color: rgba(255, 255, 255, 0.85);
 }
 
-.contact-cta:hover .contact-cta-arrow {
+.about-bullets li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+/* ============ Footer ============ */
+.footer {
+  padding: 44px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.footer-title {
+  font-weight: 950;
+  margin-bottom: 1rem;
+}
+
+.footer-small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-social {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-social:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  position: relative;
+  padding-left: 14px;
+  margin: 10px 0;
+}
+
+.footer ul li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(34, 166, 255, 0.75);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer ul li:hover::before {
   transform: translateX(4px);
-  opacity: 1;
+  color: #22a6ff;
 }
 
-.contact-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  background: rgba(54, 214, 142, 0.1);
-  border: 1px solid rgba(54, 214, 142, 0.2);
-  color: rgba(255, 255, 255, 0.92);
+.footer ul li a {
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* Dark form controls (usar form-control-dark en inputs) */
+.footer ul li:hover a {
+  transform: translateX(4px);
+  color: #fff;
+}
+
+/* ============ Buttons ============ */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: rgba(34, 166, 255, 0.65);
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #149cff;
+  border-color: rgba(34, 166, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background-color: var(--success);
+  border-color: rgba(54, 214, 142, 0.65);
+  color: #0b0f15;
+  font-weight: 700;
+}
+
+.btn-success:hover {
+  background-color: #2bc07d;
+  border-color: rgba(54, 214, 142, 0.8);
+  color: #0b0f15;
+  transform: translateY(-1px);
+}
+
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+.btn-outline-light:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* CTA acento (naranja) */
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accentBorder);
+  color: #0b0f15;
+  font-weight: 800;
+}
+
+.btn-accent:hover {
+  background-color: #ffb14a;
+  border-color: rgba(255, 159, 26, 0.75);
+  color: #0b0f15;
+  transform: translateY(-1px);
+}
+
+/* ============ Form styles ============ */
 .form-control-dark {
   background: rgba(0, 0, 0, 0.18) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: var(--text) !important;
   border-radius: 14px !important;
+  padding: 0.75rem 1rem;
 }
 
 .form-control-dark:focus {
   border-color: rgba(34, 166, 255, 0.4) !important;
   box-shadow: 0 0 0 0.2rem rgba(34, 166, 255, 0.12) !important;
+  outline: none;
 }
 
 .form-control-dark::placeholder {
   color: rgba(233, 238, 247, 0.45);
+}
+
+.form-control-dark.is-invalid {
+  border-color: #dc3545 !important;
 }
 
 .form-msg {
@@ -676,286 +663,111 @@ a.card.card-dark.service-card:hover {
   background: rgba(0, 0, 0, 0.14);
   color: rgba(233, 238, 247, 0.88);
   display: none;
+  transition: opacity 0.3s ease;
 }
 
 .form-msg.ok {
   display: block;
   border-color: rgba(54, 214, 142, 0.3);
+  background: rgba(54, 214, 142, 0.1);
 }
+
 .form-msg.err {
   display: block;
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 99, 99, 0.3);
+  background: rgba(255, 99, 99, 0.1);
 }
 
-/* Titles inside panels (contact side) */
-.panel-title {
-  color: rgba(233, 238, 247, 0.92);
-  font-weight: 750;
-  letter-spacing: -0.2px;
-  margin: 0 0 12px;
+.form-msg a {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
-/* =========================================================
-   LEGAL HERO — versión compacta
-   Aplica solo a páginas legales (body.legal-page)
-   ========================================================= */
-.legal-page .hero {
-  padding-top: 5.5rem;
-  padding-bottom: 3.5rem;
-}
-
-.legal-page .hero-card {
-  padding: 2.25rem 2.5rem;
-  min-height: auto;
-}
-
-.legal-page .hero-title {
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  margin-bottom: 0.5rem;
-}
-
-.legal-page .hero-lead {
-  font-size: 0.95rem;
-  opacity: 0.8;
-  margin-bottom: 0;
-}
-
-.legal-page .hero-pill {
-  font-size: 0.7rem;
-  padding: 0.25rem 0.55rem;
-}
-/* =========================================
-   Button System — Boxfox1 (Global)
-   Regla: 1 CTA primario por sección
-   ========================================= */
-
-/* Azul = acción principal del sitio (Contacto) */
-.btn-primary {
-  background-color: var(--primary);
-  border-color: rgba(34, 166, 255, 0.65);
-  font-weight: 700;
-}
-.btn-primary:hover {
-  background-color: #149cff;
-  border-color: rgba(34, 166, 255, 0.8);
-}
-
-/* Naranja = CTA de cierre / conversión */
-.btn-accent {
-  background-color: var(--accent);
-  border-color: var(--accentBorder);
-  color: #0b0f15;
-  font-weight: 900;
-  letter-spacing: 0.1px;
-}
-.btn-accent:hover {
-  background-color: #ffb14a;
-  border-color: rgba(255, 159, 26, 0.75);
-  color: #0b0f15;
-}
-
-/* Outline oscuro = acciones secundarias */
-.btn-outline-darkglass {
-  background: rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: rgba(233, 238, 247, 0.92);
-  font-weight: 700;
-}
-.btn-outline-darkglass:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.26);
-  color: #fff;
-}
-
-/* Grupo de CTAs en bloques tipo “panel” (mejor alineación) */
-.cta-group {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* En mobile: botones full width (mobile-first) */
-@media (max-width: 575.98px) {
-  .cta-group {
-    justify-content: stretch;
+/* ============ Responsive ============ */
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 72px;
   }
-  .cta-group .btn {
+  
+  :root {
+    --navOffset: 72px;
+  }
+
+  /* Mobile menu improvements */
+  .navbar-collapse {
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: rgba(8, 12, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 18px 18px;
+    padding: 1rem 0;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+    font-size: 1.1rem;
+  }
+
+  .navbar .nav-link.active::after {
+    bottom: 4px;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+  }
+  
+  .navbar.nav-glass .brand-text {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-meta {
+    gap: 10px;
+  }
+  
+  .hero-actions .btn {
     width: 100%;
   }
-}
-:root {
-  --accent: #ff9f1a;
-  --accentBorder: rgba(255, 159, 26, 0.55);
-}
-/* =========================================
-   Fix: CTA final heading color
-   ========================================= */
-
-.cta-final h2,
-.cta-final h3,
-.cta-final .cta-title {
-  color: #ffffff;
+  
+  .section {
+    padding: 40px 0;
+  }
 }
 
-.cta-final p {
-  color: rgba(233, 238, 247, 0.9);
-}
-/* CTA block: asegurar contraste (evita título gris) */
-.cta-block .cta-title {
-  color: #fff;
-  font-weight: 800;
-}
-.cta-block .cta-text {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* CTA de énfasis (naranja) */
-.btn-accent {
-  background-color: #ff9f1a; /* naranja */
-  border-color: #ff9f1a;
-  color: #0b1220; /* texto oscuro para contraste */
-  font-weight: 700;
-}
-
-.btn-accent:hover {
-  background-color: #ffad33;
-  border-color: #ffad33;
-  color: #0b1220;
-}
-/* =========================================================
-   Performance mode (móvil/tablet): elimina jank en scroll
-   ========================================================= */
+/* ============ Performance mode for mobile ============ */
 @media (max-width: 1024px) {
-  /* 1) Sombras: reduce blur fuerte (principal causa de lag) */
   :root {
     --shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
   }
 
-  /* 2) Quita filtros caros */
   .hero-image {
-    filter: none !important; /* drop-shadow es caro en scroll */
+    filter: none !important;
   }
 
-  /* 3) Navbar glass: desactiva blur si existe */
   .navbar.nav-glass {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
     background: rgba(10, 18, 30, 0.92) !important;
   }
 
-  /* 4) Si tienes muchas cards, baja sombras todavía más */
   .hero-card,
   .card,
-  .service-card,
-  .pricing-card {
+  .service-card {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16) !important;
   }
 }
-/* =========================================================
-   FIX: barra blanca inferior + overscroll en móvil/tablet
-   ========================================================= */
 
-/* 1) Asegura que el fondo nunca sea blanco */
-html,
-body {
-  background: var(--bg-0) !important;
-  min-height: 100%;
+/* ============ Utility classes ============ */
+.text-secondary {
+  color: var(--muted) !important;
 }
 
-/* 2) Evita “rebote” que enseña el fondo del navegador */
-body {
-  overscroll-behavior-y: none;
+.h-100 {
+  height: 100%;
 }
 
-/* 3) Corta overflow horizontal (causa común de franjas/flash) */
-html,
-body {
-  overflow-x: hidden;
-}
-
-/* 4) Previene que algún wrapper se pase de ancho */
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-  height: auto;
-}
-/* =========================
-   NAV: Brand alignment fix
-   ========================= */
-
-/* Contenedor del brand */
-.navbar.nav-glass .navbar-brand {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px; /* consistente, evita variaciones */
-  line-height: 1; /* mata baseline raro */
-}
-
-/* Imagen del logo: quita el “espacio fantasma” */
-.navbar.nav-glass .navbar-brand img {
-  display: block;
-  height: 38px; /* ajusta 34–40 si quieres */
-  width: auto;
-}
-
-/* Texto "| Web" perfectamente centrado */
-.navbar.nav-glass .brand-text {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-  white-space: nowrap;
-  margin: 0; /* por si algún reset mete margin */
-  padding: 0;
-  font-weight: 700;
-  opacity: 0.95;
-}
-
-/* =========================
-   NAV: Link vertical stability
-   (evita que active cambie altura)
-   ========================= */
-.navbar.nav-glass .navbar-nav .nav-link {
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  padding-top: 0.65rem;
-  padding-bottom: 0.65rem;
-}
-
-/* Si tu .active usa borde/subrayado, evita que empuje layout */
-.navbar.nav-glass .navbar-nav .nav-link.active {
-  border-bottom: 0 !important;
-}
-/* FIX: traslape logo + | Web (override fuerte) */
-nav.navbar .container .navbar-brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-nav.navbar .container .navbar-brand > img{
-  display:block;
-  height:28px;
-  width:auto;
-}
-
-nav.navbar .container .navbar-brand > .brand-text{
-  display:flex;
-  align-items:center;
-  height:28px;
-  line-height:1 !important;
-  margin:0 !important;
-  padding:0 !important;
-  transform: translateY(0) !important;
-  position: static !important;
-  top:auto !important;
-  font-size:1rem;
-  white-space:nowrap;
-}
-
-@media (max-width: 992px){
-  nav.navbar .container .navbar-brand > .brand-text{ display:none; }
+.mt-auto {
+  margin-top: auto;
 }
