@@ -143,7 +143,9 @@ section[id] {
   background: rgba(8, 12, 18, 0.58) !important;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -331,14 +333,24 @@ section[id] {
 }
 
 @media (min-width: 992px) {
+  .hero .row {
+    align-items: stretch;
+  }
+
   .hero .hero-card {
     min-height: var(--heroH);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .hero .hero-figure {
-    height: var(--heroH);
+    height: 100%;
     width: 100%;
     padding: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
   }
 
   .hero .hero-image {
@@ -347,6 +359,7 @@ section[id] {
     max-width: 100%;
     object-fit: cover;
     object-position: center;
+    display: block;
   }
 }
 
@@ -382,7 +395,10 @@ section[id] {
 
 .service-card {
   padding: 18px 18px 16px;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 a.card.card-dark.service-card:hover {
@@ -416,11 +432,16 @@ a.card.card-dark.service-card:hover {
   font-size: 16px;
 }
 
+.card-dark h2,
 .card-dark h3,
 .card-dark .h4,
 .card-dark .h6 {
   color: #fff;
   font-weight: 800;
+}
+
+.card-dark p {
+  color: rgba(233, 238, 247, 0.72);
 }
 
 /* ============ Checklist ============ */
@@ -524,7 +545,9 @@ a.card.card-dark.service-card:hover {
   font-size: 20px;
   line-height: 1;
   text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer-social:hover {
@@ -558,7 +581,9 @@ a.card.card-dark.service-card:hover {
   font-size: 22px;
   line-height: 1;
   color: rgba(34, 166, 255, 0.75);
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer ul li:hover::before {
@@ -568,7 +593,9 @@ a.card.card-dark.service-card:hover {
 
 .footer ul li a {
   display: inline-block;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer ul li:hover a {
@@ -605,8 +632,9 @@ a.card.card-dark.service-card:hover {
 }
 
 .btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(233, 238, 247, 0.88);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .btn-outline-light:hover {
@@ -688,7 +716,7 @@ a.card.card-dark.service-card:hover {
   body {
     padding-top: 72px;
   }
-  
+
   :root {
     --navOffset: 72px;
   }
@@ -716,7 +744,7 @@ a.card.card-dark.service-card:hover {
     right: 1rem;
     width: auto;
   }
-  
+
   .navbar.nav-glass .brand-text {
     display: none;
   }
@@ -726,11 +754,11 @@ a.card.card-dark.service-card:hover {
   .hero-meta {
     gap: 10px;
   }
-  
+
   .hero-actions .btn {
     width: 100%;
   }
-  
+
   .section {
     padding: 40px 0;
   }
@@ -770,4 +798,68 @@ a.card.card-dark.service-card:hover {
 
 .mt-auto {
   margin-top: auto;
+}
+.cta-final,
+.cta-banner,
+.launch-cta {
+  background: rgba(6, 10, 16, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+}
+
+.cta-final h2,
+.cta-banner h2,
+.launch-cta h2 {
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.cta-final p,
+.cta-banner p,
+.launch-cta p {
+  color: rgba(233, 238, 247, 0.72);
+}
+
+.cta-final .cta-link,
+.cta-banner .cta-link,
+.launch-cta .cta-link {
+  color: rgba(233, 238, 247, 0.82);
+  opacity: 1;
+}
+
+@media (max-width: 991.98px) {
+  .cta-group {
+    justify-content: flex-start;
+    margin-top: 12px;
+  }
+}
+.cta-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+.cta-final .cta-link:hover,
+.cta-banner .cta-link:hover,
+.launch-cta .cta-link:hover {
+  color: #ffffff;
+}
+/* Botón outline para fondos oscuros */
+.btn-outline-darkglass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(233, 238, 247, 0.82);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-darkglass:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
