@@ -139,15 +139,15 @@ section[id] {
   width: 100%;
   z-index: 1030;
   border-bottom: 0 !important;
-  box-shadow: none !important;
-  background: rgba(8, 12, 18, 0.58) !important;
+  background: rgba(8, 12, 18, 0.72) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition:
     background 0.2s ease,
     box-shadow 0.2s ease;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 /* FIX: Ensure navbar doesn't overlap scrollbar */
@@ -195,21 +195,10 @@ section[id] {
 
 .navbar.nav-glass .navbar-brand img {
   display: block;
-  height: 28px;
+  height: 30px;
   width: auto;
 }
 
-.navbar.nav-glass .brand-text {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-  white-space: nowrap;
-  margin: 0;
-  padding: 0;
-  font-weight: 700;
-  opacity: 0.95;
-  font-size: 15px;
-}
 
 /* Navbar links */
 .navbar .nav-link {
@@ -770,9 +759,6 @@ a.card.card-dark.service-card:hover {
     width: auto;
   }
 
-  .navbar.nav-glass .brand-text {
-    display: none;
-  }
 }
 
 @media (max-width: 575.98px) {
@@ -901,9 +887,7 @@ a.card.card-dark.service-card:hover {
     font-size: 14px;
   }
 
-  .navbar.nav-glass .brand-text {
-    font-size: 15px;
-  }
+
 
   .navbar .btn.btn-sm {
     padding-left: 0.9rem;
@@ -941,4 +925,24 @@ a.card.card-dark.service-card:hover {
 }
 .pricing-card__btn {
   margin-top: auto;
+}
+.brand-text {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* separación general */
+}
+
+/* Línea vertical más fina */
+.brand-separator {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+}
+
+/* Texto "Web" más separado y limpio */
+.brand-sub {
+  margin-left: 4px;
+  font-weight: 600;
+  opacity: 0.9;
 }
